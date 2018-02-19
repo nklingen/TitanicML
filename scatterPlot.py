@@ -7,5 +7,5 @@ from pandas.plotting import scatter_matrix
 df = pd.read_csv("train.csv")
 
 # Inspect data
-scatter_matrix(df, alpha=0.2, figsize=(12, 12), diagonal='kde')
+scatter_matrix(df, alpha=0.2, figsize=(8, 8), diagonal='kde')
 plt.show()
