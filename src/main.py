@@ -5,14 +5,18 @@ Applies machine learning algorithms to train.csv and
 separates the data into training and testing data.
 """
 
+import os
+
 import pandas as pd
 from sklearn.model_selection import cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
+os.chdir(os.path.dirname(__file__))
+
 # Import data
-df = pd.read_csv("src/train.csv")
+df = pd.read_csv("train.csv")
 
 # Assign features
 features = ["Embarked", "Pclass", "Sex", "Age", "Parch", "SibSp", "Cabin"]
@@ -94,8 +98,9 @@ df_holdout_scores = pd.DataFrame(data={"SVM Scores": svm_holdout_scores,
                                        "DT Scores": dt_holdout_scores},
                                  index=["Accuracy"])
 
+print("\n\nHoldout Scores")
 print(df_holdout_scores)
-print("\n\n")
+print("\n\nKfold Scores")
 print(df_kfold_scores)
 
 # Might be possible the model is overfitted a bit, we should look into
