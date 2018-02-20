@@ -6,18 +6,15 @@ separates the data into training and testing data.
 """
 
 import pandas as pd
-from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
 # Import data
-df = pd.read_csv("train.csv")
+df = pd.read_csv("src/train.csv")
 
 # Assign features
-features = ["Embarked", "Pclass", "Sex", "Age", "Parch", "SibSp"]
-
-# Remove corrupt data
-df = df[features + ["Survived"]].dropna()
+features = ["Embarked", "Pclass", "Sex", "Age", "Parch", "SibSp", "Cabin"]
 
 # Convert Sex to binary, integers.
 # Male = 0, Female = 1
@@ -28,6 +25,13 @@ df = df.replace(to_replace="female", value=1)
 df = df.replace(to_replace="C", value=0)
 df = df.replace(to_replace="S", value=1)
 df = df.replace(to_replace="Q", value=2)
+
+# Convert cabin to binary, so it tells us whether or not they had a cabin
+# Set value to 0 if NaN, else 1
+df["Cabin"] = df["Cabin"].apply(lambda x: 0 if type(x) == float else 1)
+
+# Remove corrupt data
+df = df[features + ["Survived"]].dropna()
 
 # Split data into test and training data
 df_train = df.iloc[0:int(len(df) * 0.75), :]
