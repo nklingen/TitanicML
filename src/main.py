@@ -1,3 +1,10 @@
+"""
+UTF-8
+
+Applies machine learning algorithms to train.csv and
+separates the data into training and testing data.
+"""
+
 import pandas as pd
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
