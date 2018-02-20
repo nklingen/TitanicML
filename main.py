@@ -34,28 +34,18 @@ X_train = df_train[features]
 y_train = df_train["Survived"]
 y_test = df_test["Survived"]
 
-# Create svm classififer, with default parameters
+
+# Create classifier instances
 svm = SVC(C=1.5, kernel="rbf")
-
-# Fit data
-svm.fit(X_train, y_train)
-
-svm.score(X_test, y_test)
-
-# Create knn classififer
 knn = KNeighborsClassifier(n_neighbors=5)
-
-# Fit data
-knn.fit(X_train, y_train)
-
-# score
-knn.score(X_test, y_test)
-
-# Create dt classifier
 dt = DecisionTreeClassifier()
 
-# Fit data
+# Fit data to classifiers
+svm.fit(X_train, y_train)
+knn.fit(X_train, y_train)
 dt.fit(X_train, y_train)
 
-# score
+# Score models to test data
+svm.score(X_test, y_test)
+knn.score(X_test, y_test)
 dt.score(X_test, y_test)
