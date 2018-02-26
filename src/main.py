@@ -3,6 +3,8 @@ UTF-8
 
 Applies machine learning algorithms to train.csv and
 separates the data into training and testing data.
+
+Simon's token: c6e56634-1e08-49dc-8c74-eff8fe36bc3c
 """
 
 import os
@@ -13,10 +15,10 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
-os.chdir(os.path.dirname(__file__))
+# os.chdir(os.path.dirname(__file__))
 
 # Import data
-df = pd.read_csv("train.csv")
+df = pd.read_csv("src/train.csv")
 
 # Assign features
 features = ["Embarked", "Pclass", "Sex", "Age", "Parch", "SibSp", "Cabin"]
@@ -88,6 +90,7 @@ dt_holdout_scores = dt_holdout.score(X_test, y_test)
 svm_kfold_scores = cross_val_score(svm_kfold, X_kfold, y_kfold, cv=10)
 knn_kfold_scores = cross_val_score(knn_kfold, X_kfold, y_kfold, cv=10)
 dt_kfold_scores = cross_val_score(dt_kfold, X_kfold, y_kfold, cv=10)
+
 
 df_kfold_scores = pd.DataFrame(data={"SVM Scores": svm_kfold_scores,
                                      "KNN Scores": knn_kfold_scores,
